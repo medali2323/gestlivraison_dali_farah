@@ -1,0 +1,604 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="gestlivraisonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="colis">
+          <Key>
+            <PropertyRef Name="codecolis" />
+          </Key>
+          <Property Name="codecolis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomclt" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="gouvernemant" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ville" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresseclt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telclt" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="telclt2" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="des" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="prix" Type="float" Nullable="false" />
+          <Property Name="nbartticle" Type="int" Nullable="false" />
+          <Property Name="commentaire" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="modepaiment" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codeexpediteur" Type="int" />
+        </EntityType>
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="iddepot" />
+          </Key>
+          <Property Name="iddepot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ville" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresse" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="numtel" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Etat">
+          <Key>
+            <PropertyRef Name="Codeetat" />
+          </Key>
+          <Property Name="Codeetat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="etatcolis">
+          <Key>
+            <PropertyRef Name="Codeetatcolis" />
+          </Key>
+          <Property Name="Codeetatcolis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codecolis" Type="int" Nullable="false" />
+          <Property Name="Codeetat" Type="int" Nullable="false" />
+          <Property Name="Codelivreur" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Commentaire" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="expediteur">
+          <Key>
+            <PropertyRef Name="Codeexpediteur" />
+          </Key>
+          <Property Name="Codeexpediteur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nomexpediteur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Numtelexpéditeur" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="gouvernemant" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="viille" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Codetva" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Modepaiement" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fraislivraison" Type="float" Nullable="false" />
+          <Property Name="Fraisretour" Type="float" Nullable="false" />
+          <Property Name="id_user" Type="int" />
+        </EntityType>
+        <EntityType Name="livreur">
+          <Key>
+            <PropertyRef Name="Codelivreur" />
+          </Key>
+          <Property Name="Codelivreur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nomlivreur" Type="nchar" MaxLength="10" />
+          <Property Name="Numtel" Type="nchar" MaxLength="10" />
+          <Property Name="numcin" Type="varchar" MaxLength="50" />
+          <Property Name="Fraislivraison" Type="float" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="iddepot" Type="int" />
+        </EntityType>
+        <EntityType Name="RecetteExpediteur">
+          <Key>
+            <PropertyRef Name="Coderecette" />
+          </Key>
+          <Property Name="Coderecette" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="datedeb" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="datefin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="montantexpediteur" Type="float" Nullable="false" />
+          <Property Name="montantsosciete" Type="float" Nullable="false" />
+          <Property Name="nbclislivre" Type="int" Nullable="false" />
+          <Property Name="nbcolisretour" Type="int" Nullable="false" />
+          <Property Name="Codeexpediteur" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reclamation">
+          <Key>
+            <PropertyRef Name="Codereclamation" />
+          </Key>
+          <Property Name="Codereclamation" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Etat" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Commentaire" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Codecolis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_colis_colis">
+          <End Role="expediteur" Type="Self.expediteur" Multiplicity="0..1" />
+          <End Role="colis" Type="Self.colis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Principal>
+            <Dependent Role="colis">
+              <PropertyRef Name="Codeexpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Depot_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Depot">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_etatcolis_colis">
+          <End Role="colis" Type="Self.colis" Multiplicity="1" />
+          <End Role="etatcolis" Type="Self.etatcolis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colis">
+              <PropertyRef Name="codecolis" />
+            </Principal>
+            <Dependent Role="etatcolis">
+              <PropertyRef Name="Codecolis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livreur_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="0..1" />
+          <End Role="livreur" Type="Self.livreur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="iddepot" />
+            </Principal>
+            <Dependent Role="livreur">
+              <PropertyRef Name="iddepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecetteExpediteur_expediteur">
+          <End Role="expediteur" Type="Self.expediteur" Multiplicity="1" />
+          <End Role="RecetteExpediteur" Type="Self.RecetteExpediteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Principal>
+            <Dependent Role="RecetteExpediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reclamation_Reclamation">
+          <End Role="colis" Type="Self.colis" Multiplicity="1" />
+          <End Role="Reclamation" Type="Self.Reclamation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colis">
+              <PropertyRef Name="codecolis" />
+            </Principal>
+            <Dependent Role="Reclamation">
+              <PropertyRef Name="Codecolis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestlivraisonModelStoreContainer">
+          <EntitySet Name="colis" EntityType="Self.colis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depot" EntityType="Self.Depot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etat" EntityType="Self.Etat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="etatcolis" EntityType="Self.etatcolis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="expediteur" EntityType="Self.expediteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="livreur" EntityType="Self.livreur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecetteExpediteur" EntityType="Self.RecetteExpediteur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reclamation" EntityType="Self.Reclamation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_colis_colis" Association="Self.FK_colis_colis">
+            <End Role="expediteur" EntitySet="expediteur" />
+            <End Role="colis" EntitySet="colis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Depot_user" Association="Self.FK_Depot_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="Depot" EntitySet="Depot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_etatcolis_colis" Association="Self.FK_etatcolis_colis">
+            <End Role="colis" EntitySet="colis" />
+            <End Role="etatcolis" EntitySet="etatcolis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livreur_Depot" Association="Self.FK_livreur_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="livreur" EntitySet="livreur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecetteExpediteur_expediteur" Association="Self.FK_RecetteExpediteur_expediteur">
+            <End Role="expediteur" EntitySet="expediteur" />
+            <End Role="RecetteExpediteur" EntitySet="RecetteExpediteur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reclamation_Reclamation" Association="Self.FK_Reclamation_Reclamation">
+            <End Role="colis" EntitySet="colis" />
+            <End Role="Reclamation" EntitySet="Reclamation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="gestlivraisonModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="colis">
+          <Key>
+            <PropertyRef Name="codecolis" />
+          </Key>
+          <Property Name="codecolis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomclt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="gouvernemant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adresseclt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telclt" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="telclt2" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="des" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prix" Type="Double" Nullable="false" />
+          <Property Name="nbartticle" Type="Int32" Nullable="false" />
+          <Property Name="commentaire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="modepaiment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Codeexpediteur" Type="Int32" />
+          <NavigationProperty Name="expediteur" Relationship="Self.FK_colis_colis" FromRole="colis" ToRole="expediteur" />
+          <NavigationProperty Name="etatcolis" Relationship="Self.FK_etatcolis_colis" FromRole="colis" ToRole="etatcolis" />
+          <NavigationProperty Name="Reclamation" Relationship="Self.FK_Reclamation_Reclamation" FromRole="colis" ToRole="Reclamation" />
+        </EntityType>
+        <EntityType Name="Depot">
+          <Key>
+            <PropertyRef Name="iddepot" />
+          </Key>
+          <Property Name="iddepot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ville" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numtel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Depot_user" FromRole="Depot" ToRole="user" />
+          <NavigationProperty Name="livreur" Relationship="Self.FK_livreur_Depot" FromRole="Depot" ToRole="livreur" />
+        </EntityType>
+        <EntityType Name="Etat">
+          <Key>
+            <PropertyRef Name="Codeetat" />
+          </Key>
+          <Property Name="Codeetat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="etatcolis">
+          <Key>
+            <PropertyRef Name="Codeetatcolis" />
+          </Key>
+          <Property Name="Codeetatcolis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codecolis" Type="Int32" Nullable="false" />
+          <Property Name="Codeetat" Type="Int32" Nullable="false" />
+          <Property Name="Codelivreur" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Commentaire" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="colis" Relationship="Self.FK_etatcolis_colis" FromRole="etatcolis" ToRole="colis" />
+        </EntityType>
+        <EntityType Name="expediteur">
+          <Key>
+            <PropertyRef Name="Codeexpediteur" />
+          </Key>
+          <Property Name="Codeexpediteur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nomexpediteur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Numtelexpéditeur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="gouvernemant" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="viille" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Codetva" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Modepaiement" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fraislivraison" Type="Double" Nullable="false" />
+          <Property Name="Fraisretour" Type="Double" Nullable="false" />
+          <Property Name="id_user" Type="Int32" />
+          <NavigationProperty Name="colis" Relationship="Self.FK_colis_colis" FromRole="expediteur" ToRole="colis" />
+          <NavigationProperty Name="RecetteExpediteur" Relationship="Self.FK_RecetteExpediteur_expediteur" FromRole="expediteur" ToRole="RecetteExpediteur" />
+        </EntityType>
+        <EntityType Name="livreur">
+          <Key>
+            <PropertyRef Name="Codelivreur" />
+          </Key>
+          <Property Name="Codelivreur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nomlivreur" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Numtel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="numcin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Fraislivraison" Type="Double" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iddepot" Type="Int32" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_livreur_Depot" FromRole="livreur" ToRole="Depot" />
+        </EntityType>
+        <EntityType Name="RecetteExpediteur">
+          <Key>
+            <PropertyRef Name="Coderecette" />
+          </Key>
+          <Property Name="Coderecette" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="datedeb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="datefin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="montantexpediteur" Type="Double" Nullable="false" />
+          <Property Name="montantsosciete" Type="Double" Nullable="false" />
+          <Property Name="nbclislivre" Type="Int32" Nullable="false" />
+          <Property Name="nbcolisretour" Type="Int32" Nullable="false" />
+          <Property Name="Codeexpediteur" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="expediteur" Relationship="Self.FK_RecetteExpediteur_expediteur" FromRole="RecetteExpediteur" ToRole="expediteur" />
+        </EntityType>
+        <EntityType Name="Reclamation">
+          <Key>
+            <PropertyRef Name="Codereclamation" />
+          </Key>
+          <Property Name="Codereclamation" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Etat" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Commentaire" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Codecolis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="colis" Relationship="Self.FK_Reclamation_Reclamation" FromRole="Reclamation" ToRole="colis" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int64" />
+          <NavigationProperty Name="Depot" Relationship="Self.FK_Depot_user" FromRole="user" ToRole="Depot" />
+        </EntityType>
+        <Association Name="FK_colis_colis">
+          <End Role="expediteur" Type="Self.expediteur" Multiplicity="0..1" />
+          <End Role="colis" Type="Self.colis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Principal>
+            <Dependent Role="colis">
+              <PropertyRef Name="Codeexpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_etatcolis_colis">
+          <End Role="colis" Type="Self.colis" Multiplicity="1" />
+          <End Role="etatcolis" Type="Self.etatcolis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colis">
+              <PropertyRef Name="codecolis" />
+            </Principal>
+            <Dependent Role="etatcolis">
+              <PropertyRef Name="Codecolis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reclamation_Reclamation">
+          <End Role="colis" Type="Self.colis" Multiplicity="1" />
+          <End Role="Reclamation" Type="Self.Reclamation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="colis">
+              <PropertyRef Name="codecolis" />
+            </Principal>
+            <Dependent Role="Reclamation">
+              <PropertyRef Name="Codecolis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Depot_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="Depot" Type="Self.Depot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Depot">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_livreur_Depot">
+          <End Role="Depot" Type="Self.Depot" Multiplicity="0..1" />
+          <End Role="livreur" Type="Self.livreur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depot">
+              <PropertyRef Name="iddepot" />
+            </Principal>
+            <Dependent Role="livreur">
+              <PropertyRef Name="iddepot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecetteExpediteur_expediteur">
+          <End Role="expediteur" Type="Self.expediteur" Multiplicity="1" />
+          <End Role="RecetteExpediteur" Type="Self.RecetteExpediteur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="expediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Principal>
+            <Dependent Role="RecetteExpediteur">
+              <PropertyRef Name="Codeexpediteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="gestlivraisonEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="colis" EntityType="Self.colis" />
+          <EntitySet Name="Depot" EntityType="Self.Depot" />
+          <EntitySet Name="Etat" EntityType="Self.Etat" />
+          <EntitySet Name="etatcolis" EntityType="Self.etatcolis" />
+          <EntitySet Name="expediteur" EntityType="Self.expediteur" />
+          <EntitySet Name="livreur" EntityType="Self.livreur" />
+          <EntitySet Name="RecetteExpediteur" EntityType="Self.RecetteExpediteur" />
+          <EntitySet Name="Reclamation" EntityType="Self.Reclamation" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="FK_colis_colis" Association="Self.FK_colis_colis">
+            <End Role="expediteur" EntitySet="expediteur" />
+            <End Role="colis" EntitySet="colis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_etatcolis_colis" Association="Self.FK_etatcolis_colis">
+            <End Role="colis" EntitySet="colis" />
+            <End Role="etatcolis" EntitySet="etatcolis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reclamation_Reclamation" Association="Self.FK_Reclamation_Reclamation">
+            <End Role="colis" EntitySet="colis" />
+            <End Role="Reclamation" EntitySet="Reclamation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Depot_user" Association="Self.FK_Depot_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="Depot" EntitySet="Depot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_livreur_Depot" Association="Self.FK_livreur_Depot">
+            <End Role="Depot" EntitySet="Depot" />
+            <End Role="livreur" EntitySet="livreur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecetteExpediteur_expediteur" Association="Self.FK_RecetteExpediteur_expediteur">
+            <End Role="expediteur" EntitySet="expediteur" />
+            <End Role="RecetteExpediteur" EntitySet="RecetteExpediteur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="gestlivraisonModelStoreContainer" CdmEntityContainer="gestlivraisonEntities6">
+          <EntitySetMapping Name="colis">
+            <EntityTypeMapping TypeName="gestlivraisonModel.colis">
+              <MappingFragment StoreEntitySet="colis">
+                <ScalarProperty Name="codecolis" ColumnName="codecolis" />
+                <ScalarProperty Name="nomclt" ColumnName="nomclt" />
+                <ScalarProperty Name="gouvernemant" ColumnName="gouvernemant" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="adresseclt" ColumnName="adresseclt" />
+                <ScalarProperty Name="telclt" ColumnName="telclt" />
+                <ScalarProperty Name="telclt2" ColumnName="telclt2" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="nbartticle" ColumnName="nbartticle" />
+                <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+                <ScalarProperty Name="modepaiment" ColumnName="modepaiment" />
+                <ScalarProperty Name="Codeexpediteur" ColumnName="Codeexpediteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Depot">
+            <EntityTypeMapping TypeName="gestlivraisonModel.Depot">
+              <MappingFragment StoreEntitySet="Depot">
+                <ScalarProperty Name="iddepot" ColumnName="iddepot" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="numtel" ColumnName="numtel" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etat">
+            <EntityTypeMapping TypeName="gestlivraisonModel.Etat">
+              <MappingFragment StoreEntitySet="Etat">
+                <ScalarProperty Name="Codeetat" ColumnName="Codeetat" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="etatcolis">
+            <EntityTypeMapping TypeName="gestlivraisonModel.etatcolis">
+              <MappingFragment StoreEntitySet="etatcolis">
+                <ScalarProperty Name="Codeetatcolis" ColumnName="Codeetatcolis" />
+                <ScalarProperty Name="Codecolis" ColumnName="Codecolis" />
+                <ScalarProperty Name="Codeetat" ColumnName="Codeetat" />
+                <ScalarProperty Name="Codelivreur" ColumnName="Codelivreur" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="expediteur">
+            <EntityTypeMapping TypeName="gestlivraisonModel.expediteur">
+              <MappingFragment StoreEntitySet="expediteur">
+                <ScalarProperty Name="Codeexpediteur" ColumnName="Codeexpediteur" />
+                <ScalarProperty Name="Nomexpediteur" ColumnName="Nomexpediteur" />
+                <ScalarProperty Name="Numtelexpéditeur" ColumnName="Numtelexpéditeur" />
+                <ScalarProperty Name="gouvernemant" ColumnName="gouvernemant" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="viille" ColumnName="viille" />
+                <ScalarProperty Name="Codetva" ColumnName="Codetva" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Modepaiement" ColumnName="Modepaiement" />
+                <ScalarProperty Name="Fraislivraison" ColumnName="Fraislivraison" />
+                <ScalarProperty Name="Fraisretour" ColumnName="Fraisretour" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="livreur">
+            <EntityTypeMapping TypeName="gestlivraisonModel.livreur">
+              <MappingFragment StoreEntitySet="livreur">
+                <ScalarProperty Name="Codelivreur" ColumnName="Codelivreur" />
+                <ScalarProperty Name="Nomlivreur" ColumnName="Nomlivreur" />
+                <ScalarProperty Name="Numtel" ColumnName="Numtel" />
+                <ScalarProperty Name="numcin" ColumnName="numcin" />
+                <ScalarProperty Name="Fraislivraison" ColumnName="Fraislivraison" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="iddepot" ColumnName="iddepot" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecetteExpediteur">
+            <EntityTypeMapping TypeName="gestlivraisonModel.RecetteExpediteur">
+              <MappingFragment StoreEntitySet="RecetteExpediteur">
+                <ScalarProperty Name="Coderecette" ColumnName="Coderecette" />
+                <ScalarProperty Name="datedeb" ColumnName="datedeb" />
+                <ScalarProperty Name="datefin" ColumnName="datefin" />
+                <ScalarProperty Name="montantexpediteur" ColumnName="montantexpediteur" />
+                <ScalarProperty Name="montantsosciete" ColumnName="montantsosciete" />
+                <ScalarProperty Name="nbclislivre" ColumnName="nbclislivre" />
+                <ScalarProperty Name="nbcolisretour" ColumnName="nbcolisretour" />
+                <ScalarProperty Name="Codeexpediteur" ColumnName="Codeexpediteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reclamation">
+            <EntityTypeMapping TypeName="gestlivraisonModel.Reclamation">
+              <MappingFragment StoreEntitySet="Reclamation">
+                <ScalarProperty Name="Codereclamation" ColumnName="Codereclamation" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Etat" ColumnName="Etat" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Codecolis" ColumnName="Codecolis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="gestlivraisonModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
